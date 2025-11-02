@@ -22,8 +22,11 @@ class DuplicateFinder:
                 union = perms_i.union(perms_j)
                 if union:  # Avoid division by zero
                     similarity = len(intersection) / len(union)
-                    if similarity > DuplicateFinder.SIMILARITY_THRESHOLD:
+                    if similarity >= DuplicateFinder.SIMILARITY_THRESHOLD:
                         duplicates.append(JaccardDifference(self.permsets[i], self.permsets[j], similarity))
+                if not union and not intersection:
+                    # Both permission sets are empty, consider them identical
+                    duplicates.append(JaccardDifference(self.permsets[i], self.permsets[j], 1.0))
         logging.debug(f"<< jaccard: returning nb records={len(duplicates)}")
         # Sort by similarity descending (most similar first)
         duplicates = sorted(duplicates, key=lambda t: t.similarity, reverse=True)
