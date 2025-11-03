@@ -2,6 +2,8 @@
 
 A tool to find similar permission sets in a Salesforce org
 
+Also see https://medium.com/@laurentkubaski/finding-salesforce-duplicate-permission-sets-using-the-jaccard-index-32454fa9597d
+
 ## Features
 
 - Finds similar permission sets in a Salesforce org
